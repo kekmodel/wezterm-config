@@ -2,8 +2,8 @@ local wezterm = require 'wezterm'
 local act = wezterm.action
 
 return {
-  -- 성능: GPU 가속
-  front_end = "WebGpu",
+  -- 성능: OpenGL (WebGPU는 메모리 누수 이슈 있음)
+  front_end = "OpenGL",
   scrollback_lines = 100000,
 
   -- 폰트 (Menlo + 한글 폴백)

@@ -4,7 +4,7 @@ Minimal WezTerm configuration for macOS with tmux-like keybindings.
 
 ## Features
 
-- **GPU Accelerated**: WebGpu frontend
+- **GPU Accelerated**: OpenGL frontend (WebGPU has memory leak issues)
 - **Font**: Menlo + Apple SD Gothic Neo (Korean fallback)
 - **Theme**: Atom
 - **Leader Key**: `Ctrl+A` (tmux style)
