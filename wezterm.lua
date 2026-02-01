@@ -32,6 +32,31 @@ return {
       mods = 'NONE',
       action = act.CompleteSelection 'ClipboardAndPrimarySelection',
     },
+    -- Cmd+Click으로 hyperlink 열기 (macOS)
+    {
+      event = { Up = { streak = 1, button = 'Left' } },
+      mods = 'CMD',
+      action = act.OpenLinkAtMouseCursor,
+    },
+  },
+
+  -- 파일 경로 클릭 시 VS Code로 열기
+  hyperlink_rules = {
+    -- URL
+    {
+      regex = [[\b\w+://[\w.-]+\.[a-z]{2,15}\S*\b]],
+      format = '$0',
+    },
+    -- ~/path → vscode://file//Users/xxx/path (홈디렉토리 확장)
+    {
+      regex = [[~/([\w\-\./]+)]],
+      format = 'vscode://file/' .. wezterm.home_dir .. '/$1',
+    },
+    -- /absolute/path → vscode://file//absolute/path
+    {
+      regex = [[(/[\w\-\./]+\.[\w]+)]],
+      format = 'vscode://file/$1',
+    },
   },
 
   -- Leader: Ctrl+A (tmux)
