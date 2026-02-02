@@ -70,6 +70,9 @@ return {
   leader = { key = 'a', mods = 'CTRL', timeout_milliseconds = 1000 },
 
   keys = {
+    -- Shift+Enter: 줄바꿈 (Claude Code 등에서 사용)
+    { key = 'Enter', mods = 'SHIFT', action = act.SendString '\x1b[13;2u' },
+
     -- 분할: | -
     { key = '|', mods = 'LEADER|SHIFT', action = act.SplitHorizontal { domain = 'CurrentPaneDomain' } },
     { key = '-', mods = 'LEADER', action = act.SplitVertical { domain = 'CurrentPaneDomain' } },
