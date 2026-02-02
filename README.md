@@ -10,7 +10,7 @@ Minimal WezTerm configuration for macOS with tmux-like keybindings.
 - **Leader Key**: `Ctrl+A` (tmux style)
 - **Copy on Select**: Drag to copy to clipboard
 - **Hyperlink**: Cmd+Click to open file paths in VS Code
-- **Mux Server**: Unix domain socket for remote connections
+- **Session Restore**: Auto-connect to Mux server on app launch (close window, reopen = session restored)
 
 ## Keybindings
 
