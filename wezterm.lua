@@ -6,11 +6,13 @@ return {
   front_end = "OpenGL",
   scrollback_lines = 100000,
 
-  -- 폰트 (Menlo + 한글 폴백)
-  font = wezterm.font_with_fallback({
-    'Menlo',
-    'Apple SD Gothic Neo',
-  }),
+  -- Mux 서버 설정 (원격 접속용)
+  unix_domains = {
+    { name = 'unix' },
+  },
+
+  -- 폰트
+  font = wezterm.font('Menlo'),
   font_size = 13.0,
   harfbuzz_features = { 'calt=0', 'clig=0', 'liga=0' },
 
@@ -40,21 +42,25 @@ return {
     },
   },
 
-  -- 파일 경로 클릭 시 VS Code로 열기
   hyperlink_rules = {
     -- URL
     {
       regex = [[\b\w+://[\w.-]+\.[a-z]{2,15}\S*\b]],
       format = '$0',
     },
-    -- ~/path → vscode://file//Users/xxx/path (홈디렉토리 확장)
+    -- ~/path → vscode://file//Users/jd/path (홈디렉토리 확장)
     {
       regex = [[~/([\w\-\./]+)]],
       format = 'vscode://file/' .. wezterm.home_dir .. '/$1',
     },
-    -- /absolute/path → vscode://file//absolute/path
+    -- /absolute/path (파일 - 확장자 있음)
     {
       regex = [[(/[\w\-\./]+\.[\w]+)]],
+      format = 'vscode://file/$1',
+    },
+    -- /absolute/path (디렉토리 - 2단계 이상 경로)
+    {
+      regex = [[(/(?:[\w\-]+/)+[\w\-]+/?)]],
       format = 'vscode://file/$1',
     },
   },
@@ -74,13 +80,7 @@ return {
     { key = 'n', mods = 'LEADER', action = act.ActivateTabRelative(1) },
     { key = 'p', mods = 'LEADER', action = act.ActivateTabRelative(-1) },
 
-    -- 패널 이동: h j k l
-    { key = 'h', mods = 'LEADER', action = act.ActivatePaneDirection 'Left' },
-    { key = 'j', mods = 'LEADER', action = act.ActivatePaneDirection 'Down' },
-    { key = 'k', mods = 'LEADER', action = act.ActivatePaneDirection 'Up' },
-    { key = 'l', mods = 'LEADER', action = act.ActivatePaneDirection 'Right' },
-
-    -- Alt+방향키: 패널 이동 (바로)
+    -- Alt+방향키: 패널 이동
     { key = 'LeftArrow', mods = 'ALT', action = act.ActivatePaneDirection 'Left' },
     { key = 'RightArrow', mods = 'ALT', action = act.ActivatePaneDirection 'Right' },
     { key = 'UpArrow', mods = 'ALT', action = act.ActivatePaneDirection 'Up' },
