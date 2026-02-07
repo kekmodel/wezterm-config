@@ -67,6 +67,9 @@ return {
   },
 
   keys = {
+    -- Cmd+A: tmux prefix (Ctrl+A 대신)
+    { key = 'a', mods = 'CMD', action = act.SendString '\x01' },
+
     -- Cmd+방향키: tmux pane 이동 (Meta modifier=9 시퀀스 전송)
     { key = 'LeftArrow', mods = 'CMD', action = act.SendString '\x1b[1;9D' },
     { key = 'RightArrow', mods = 'CMD', action = act.SendString '\x1b[1;9C' },
