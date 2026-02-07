@@ -67,9 +67,6 @@ return {
   },
 
   keys = {
-    -- Shift+Enter: 줄바꿈 (Claude Code 등에서 사용)
-    { key = 'Enter', mods = 'SHIFT', action = act.SendString '\x1b[13;2u' },
-
     -- Cmd+방향키: tmux pane 이동 (Meta modifier=9 시퀀스 전송)
     { key = 'LeftArrow', mods = 'CMD', action = act.SendString '\x1b[1;9D' },
     { key = 'RightArrow', mods = 'CMD', action = act.SendString '\x1b[1;9C' },
