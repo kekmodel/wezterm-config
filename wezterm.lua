@@ -13,12 +13,12 @@ return {
   default_gui_startup_args = { 'connect', 'unix' },
 
   -- 폰트
-  font = wezterm.font('Menlo'),
+  -- font = wezterm.font('Menlo'),
   font_size = 13.0,
   harfbuzz_features = { 'calt=0', 'clig=0', 'liga=0' },
 
   -- 테마
-  color_scheme = 'Atom',
+  -- color_scheme = 'Atom',
 
   -- 탭바
   hide_tab_bar_if_only_one_tab = true,
@@ -66,42 +66,14 @@ return {
     },
   },
 
-  -- Leader: Ctrl+A (tmux)
-  leader = { key = 'a', mods = 'CTRL', timeout_milliseconds = 1000 },
-
   keys = {
     -- Shift+Enter: 줄바꿈 (Claude Code 등에서 사용)
     { key = 'Enter', mods = 'SHIFT', action = act.SendString '\x1b[13;2u' },
 
-    -- 분할: | -
-    { key = '|', mods = 'LEADER|SHIFT', action = act.SplitHorizontal { domain = 'CurrentPaneDomain' } },
-    { key = '-', mods = 'LEADER', action = act.SplitVertical { domain = 'CurrentPaneDomain' } },
-
-    -- 탭: c x z n p
-    { key = 'c', mods = 'LEADER', action = act.SpawnTab 'CurrentPaneDomain' },
-    { key = 'x', mods = 'LEADER', action = act.CloseCurrentPane { confirm = true } },
-    { key = 'z', mods = 'LEADER', action = act.TogglePaneZoomState },
-    { key = 'n', mods = 'LEADER', action = act.ActivateTabRelative(1) },
-    { key = 'p', mods = 'LEADER', action = act.ActivateTabRelative(-1) },
-
-    -- Alt+방향키: 패널 이동
-    { key = 'LeftArrow', mods = 'ALT', action = act.ActivatePaneDirection 'Left' },
-    { key = 'RightArrow', mods = 'ALT', action = act.ActivatePaneDirection 'Right' },
-    { key = 'UpArrow', mods = 'ALT', action = act.ActivatePaneDirection 'Up' },
-    { key = 'DownArrow', mods = 'ALT', action = act.ActivatePaneDirection 'Down' },
-
-    -- Shift+방향키: 탭 이동 (바로)
-    { key = 'LeftArrow', mods = 'SHIFT', action = act.ActivateTabRelative(-1) },
-    { key = 'RightArrow', mods = 'SHIFT', action = act.ActivateTabRelative(1) },
-
-    -- 복사 모드
-    { key = '[', mods = 'LEADER', action = act.ActivateCopyMode },
-
-    -- 탭 번호 1-5
-    { key = '1', mods = 'LEADER', action = act.ActivateTab(0) },
-    { key = '2', mods = 'LEADER', action = act.ActivateTab(1) },
-    { key = '3', mods = 'LEADER', action = act.ActivateTab(2) },
-    { key = '4', mods = 'LEADER', action = act.ActivateTab(3) },
-    { key = '5', mods = 'LEADER', action = act.ActivateTab(4) },
+    -- Cmd+방향키: tmux pane 이동 (Meta modifier=9 시퀀스 전송)
+    { key = 'LeftArrow', mods = 'CMD', action = act.SendString '\x1b[1;9D' },
+    { key = 'RightArrow', mods = 'CMD', action = act.SendString '\x1b[1;9C' },
+    { key = 'UpArrow', mods = 'CMD', action = act.SendString '\x1b[1;9A' },
+    { key = 'DownArrow', mods = 'CMD', action = act.SendString '\x1b[1;9B' },
   },
 }
