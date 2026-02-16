@@ -18,7 +18,10 @@ return {
   scrollback_lines = 100000,
 
   -- === 외형 ===
-  font = wezterm.font('SF Mono'),
+  font = wezterm.font_with_fallback {
+    'SF Mono',
+    'SF Pro',
+  },
   font_size = 13.0,
   harfbuzz_features = { 'calt=0', 'clig=0', 'liga=0' },
   color_scheme = 'Dracula+',
